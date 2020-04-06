@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public float fireRate;
 
     private float nextFire;
+
+    public AudioClip musicClip;
+
+    public AudioSource musicSource;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,7 +34,10 @@ public class PlayerController : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            musicSource.Play();
+
         }
+        
     }
     void FixedUpdate()
     {
@@ -49,10 +56,7 @@ public class PlayerController : MonoBehaviour
 
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
 
-        if (Input.GetKey("escape"))
-        {
-            Application.Quit();
-        }
+      
     }
 
 }
